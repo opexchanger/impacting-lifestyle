@@ -47,7 +47,7 @@ export interface IArticle {
   tags: Array<string>;
   slug?: string;
   title?: string;
-  excerpt?: string;
+  description?: string;
   date?: string;
   coverImage?: ImageReference;
   content?: ContentItem[];

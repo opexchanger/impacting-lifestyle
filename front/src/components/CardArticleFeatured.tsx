@@ -14,7 +14,7 @@ interface CardArticleFeaturedProps {
 const CardArticleFeatured: React.FC<CardArticleFeaturedProps> = ({
   article,
 }) => {
-  const { slug, coverImage, title, excerpt, date, tags, author } = article;
+  const { slug, coverImage, title, description, date, tags, author } = article;
   return (
     <NextLink href={`/blog/${slug}`}>
       <Box
@@ -93,7 +93,7 @@ const CardArticleFeatured: React.FC<CardArticleFeaturedProps> = ({
             color={useColorModeValue('gray.700', 'gray.200')}
             fontSize={{ base: 'md', lg: 'lg' }}
           >
-            {excerpt}
+            {description}
           </Text>
           <ArticleInfo author={author} date={date} />
         </Box>

@@ -16,12 +16,7 @@ const FormattedDate = ({
   const date = parseISO(children);
 
   return (
-    <Flex
-      align='center'
-      marginX='2'
-      marginTop={{ base: '1', sm: '0' }}
-      {...props}
-    >
+    <Flex align='center' marginX='2' {...props}>
       {withIcon && <CalendarIcon marginRight='2' />}
       <Text as='span' fontSize={{ base: 'sm', lg: 'md' }}>
         {format(date, `d 'de' MMMM 'de' yyyy`, { locale: ptBR })}

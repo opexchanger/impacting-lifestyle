@@ -5,7 +5,7 @@ import ArticleInfo from './ArticleInfo';
 import { IArticle } from '../types/sanity';
 import CardArticleCover from './CardArticleCover';
 import CardArticleTitle from './CardArticleTitle';
-import CardArticleExcerpt from './CardArticleExcerpt';
+import CardArticleDescription from './CardArticleDescription';
 import CardArticleTags from './CardArticleTags';
 
 export interface CardArticleProps {
@@ -13,7 +13,7 @@ export interface CardArticleProps {
 }
 
 const CardArticle: React.FC<CardArticleProps> = ({ article }) => {
-  const { slug, coverImage, title, excerpt, date, tags, author } = article;
+  const { slug, coverImage, title, description, date, tags, author } = article;
 
   // TODO isso totalmente dá um Compound Component
 
@@ -27,7 +27,7 @@ const CardArticle: React.FC<CardArticleProps> = ({ article }) => {
           <CardArticleCover coverImage={coverImage} />
           {tags?.length && <CardArticleTags tags={tags} marginTop='3' />}
           <CardArticleTitle title={title} />
-          <CardArticleExcerpt excerpt={excerpt} />
+          <CardArticleDescription description={description} />
           <ArticleInfo author={author} date={date} />
         </Box>
       </WrapItem>

@@ -54,9 +54,17 @@ export default function Article({
       className='container'
     >
       <Flex className='categories' marginBottom='4' wrap='wrap'>
-        <CategoryTag title='Desenvolvimento' />
-        <CategoryTag title='Web' />
-        <FormattedDate withIcon>{date}</FormattedDate>
+        <FormattedDate
+          withIcon
+          marginRight={{ base: '3', lg: '5' }}
+          marginBottom={{ base: '2', sm: '0' }}
+        >
+          {date}
+        </FormattedDate>
+        <Flex wrap='wrap'>
+          <CategoryTag title='Desenvolvimento' />
+          <CategoryTag title='Web' />
+        </Flex>
       </Flex>
       <Heading
         as='h1'

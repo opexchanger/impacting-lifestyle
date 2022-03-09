@@ -5,7 +5,7 @@ const DarkModeSwitch = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   return (
-    <Flex align='center'>
+    <Flex align='center' position='sticky' top='0'>
       <SunIcon w='3' display={{ base: 'none', xs: 'block' }} />
       <Switch
         marginX='2'
