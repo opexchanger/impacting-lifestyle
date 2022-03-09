@@ -1,12 +1,12 @@
 import { HStack, SpaceProps, Tag } from '@chakra-ui/react';
 
-interface IBlogTags {
+interface ICardArticleTags {
   tags: Array<string>;
   marginTop?: SpaceProps['marginTop'];
   marginBottom?: SpaceProps['marginBottom'];
 }
 
-const BlogTags: React.FC<IBlogTags> = (props) => {
+const CardArticleTags: React.FC<ICardArticleTags> = (props) => {
   return (
     <HStack
       spacing={2}
@@ -24,4 +24,4 @@ const BlogTags: React.FC<IBlogTags> = (props) => {
   );
 };
 
-export default BlogTags;
+export default CardArticleTags;

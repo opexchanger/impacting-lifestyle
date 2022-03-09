@@ -6,31 +6,42 @@ import NewsletterSubscribe from '../components/NewsletterSubscribe';
 import ArticlesFeed from '../containers/ArticlesFeed';
 import Layout from '../containers/Layout';
 
-import { getBlogPosts } from '../connection/functions';
+import { getAllArticles } from '../connection/functions';
 import { IArticle } from '../types/sanity';
+import CardArticle from '../components/CardArticle';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const blogPosts = await getBlogPosts();
+  const articles = await getAllArticles();
 
   return {
     props: {
-      blogPosts,
+      articles,
     },
   };
 };
 
-export interface BlogProps {
-  allArticles: IArticle[];
+export interface ArticleProps {
+  articles: IArticle[];
 }
 
-const Index = ({ allArticles }: BlogProps) => {
+const Index = ({ articles }: ArticleProps) => {
   let content: ReactNode;
-  if (allArticles && allArticles.length) {
-    content = <ArticlesFeed allArticles={allArticles} />;
+  if (articles && articles.length) {
+    content = (
+      <ArticlesFeed featured={articles[0]}>
+        {articles.map((article) => (
+          <CardArticle article={article} key={article.slug} />
+        ))}
+      </ArticlesFeed>
+    );
   } else {
     content = (
-      <Flex justify='center' align='center'>
-        <Text>
+      <Flex justify='center' align='center' height='35vh'>
+        <Text
+          fontSize={{ base: 'md', sm: 'lg' }}
+          padding='3'
+          textAlign={{ base: 'center', md: 'initial' }}
+        >
           Parece que nenhuma postagem foi carregada... isso deve se resolver em
           breve.
         </Text>

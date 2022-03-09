@@ -1,29 +1,26 @@
 import groq from 'groq';
 
-export const blogPostPathsQuery = groq`
+export const articlesPathsQuery = groq`
   *[_type == 'post'] {
-    locale,
     'slug': slug.current
   }
 `;
 
-export const blogPostSlugsQuery = groq`
-  *[_type == 'post' && locale == $locale] {
-    'slug': slug.current
-  }
-`;
-
-export const blogPostsQuery = groq`
-  *[_type == 'post' && locale == $locale] | order(date desc, title asc) [$start...$end] {
+export const allArticlesQuery = groq`
+  *[_type == 'post'] | order(date desc, title asc) {
     'slug': slug.current,
     title,
     description,
     date,
-    coverImage
+    coverImage,
+    'author': author-> {
+      name,
+      avatar
+    }
   }
 `;
 
-export const blogPostQuery = groq`
+export const articleQuery = groq`
   *[_type == 'post' && slug.current == $slug] {
     'slug': slug.current,
     title,

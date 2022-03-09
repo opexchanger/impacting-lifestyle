@@ -1,56 +1,43 @@
 import imageUrlBuilder from '@sanity/image-url';
 import client from './client';
-import {
-  blogPostPathsQuery,
-  blogPostSlugsQuery,
-  blogPostsQuery,
-  blogPostQuery,
-} from './queries';
-import { Article, Asset, ImageReference } from '../types/sanity';
+import { articlesPathsQuery, allArticlesQuery, articleQuery } from './queries';
+import { IArticle, Asset, ImageReference } from '../types/sanity';
 
-export type GetBlogPostPaths = () => Promise<Article[]>;
+export type GetAllArticlePaths = () => Promise<IArticle[]>;
 
-export const getBlogPostPaths: GetBlogPostPaths = async () => {
-  const blogPostPaths = await client.fetch(blogPostPathsQuery);
+export const getAllArticlesPaths: GetAllArticlePaths = async () => {
+  const articlePaths = await client.fetch(articlesPathsQuery);
 
-  return blogPostPaths;
+  return articlePaths;
 };
 
-export type GetBlogPostSlugs = () => Promise<Article[]>;
-
-export const getBlogPostSlugs: GetBlogPostSlugs = async () => {
-  const blogPostSlugs = await client.fetch(blogPostSlugsQuery);
-
-  return blogPostSlugs;
-};
-
-// export type GetBlogPosts = (
+// export type Getarticles = (
 //   page: number,
 //   postsPerPage: number
-// ) => Promise<BlogPost[]>;
-export type GetBlogPosts = () => Promise<Article[]>;
+// ) => Promise<article[]>;
+export type GetAllArticles = () => Promise<IArticle[]>;
 
-// export const getBlogPosts: GetBlogPosts = async (page, postsPerPage) => {
+// export const getarticles: Getarticles = async (page, postsPerPage) => {
 //   const start = (page - 1) * postsPerPage;
 //   const end = page * postsPerPage;
-//   const blogPosts = await client.fetch(blogPostsQuery, { start, end });
+//   const articles = await client.fetch(articlesQuery, { start, end });
 
-//   return blogPosts;
+//   return articles;
 // };
-export const getBlogPosts: GetBlogPosts = async () => {
-  const blogPosts = await client.fetch(blogPostsQuery);
+export const getAllArticles: GetAllArticles = async () => {
+  const articles = await client.fetch(allArticlesQuery);
 
-  return blogPosts;
+  return articles;
 };
 
-export type GetBlogPost = (slug: string) => Promise<Article>;
+export type GetArticle = (slug: string) => Promise<IArticle>;
 
-export const getBlogPost: GetBlogPost = async (slug) => {
-  const blogPost = await client
-    .fetch(blogPostQuery, { slug })
+export const getArticle: GetArticle = async (slug) => {
+  const article = await client
+    .fetch(articleQuery, { slug })
     .then((res) => res[0]);
 
-  return blogPost;
+  return article;
 };
 
 const builder = imageUrlBuilder(client);

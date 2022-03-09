@@ -1,0 +1,56 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
+import NewsletterSubscribe from '../../components/NewsletterSubscribe';
+import {
+  getArticle,
+  getAllArticlesPaths,
+  urlFor,
+} from '../../connection/functions';
+import Article from '../../containers/Article';
+import Layout from '../../containers/Layout';
+import { IArticle } from '../../types/sanity';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const articlesPaths = await getAllArticlesPaths();
+  const paths = articlesPaths.map(({ slug }) => ({
+    params: { slug },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  let { slug } = params;
+  if (slug instanceof Array) {
+    slug = slug[0];
+  }
+  const article = await getArticle(slug);
+
+  return {
+    props: {
+      article,
+    },
+  };
+};
+
+export interface ArticleProps {
+  article: IArticle;
+}
+
+const Index = ({ article }: ArticleProps) => (
+  <Layout>
+    <Article
+      title={article?.title}
+      date={article?.date}
+      authorName={article?.author.name}
+      authorAvatarUrl={urlFor(article?.author?.avatar).width(40).url()}
+      coverImageUrl={urlFor(article?.coverImage).width(720).url()}
+      content={article?.content}
+    />
+    <NewsletterSubscribe />
+  </Layout>
+);
+
+export default Index;

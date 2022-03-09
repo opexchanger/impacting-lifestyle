@@ -1,5 +1,6 @@
 import { Container, Flex, Heading } from '@chakra-ui/react';
 import BlockContent from '@sanity/block-content-to-react';
+import CategoryTag from '../components/CategoryTag';
 import CodeSnippet from '../components/CodeSnippet';
 import FormattedDate from '../components/FormattedDate';
 import NextChakraImage from '../components/NextChakraImage';
@@ -53,9 +54,9 @@ export default function Article({
       className='container'
     >
       <Flex className='categories' marginBottom='4' wrap='wrap'>
-        {/* <CategoryTag title='Desenvolvimento' />
-            <CategoryTag title='Web' /> */}
-        <FormattedDate>{date}</FormattedDate>
+        <CategoryTag title='Desenvolvimento' />
+        <CategoryTag title='Web' />
+        <FormattedDate withIcon>{date}</FormattedDate>
       </Flex>
       <Heading
         as='h1'

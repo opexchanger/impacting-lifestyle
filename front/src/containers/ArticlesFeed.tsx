@@ -1,31 +1,16 @@
 import { Container, Divider, Wrap } from '@chakra-ui/react';
 
 import CardArticleFeatured from '../components/CardArticleFeatured';
-import CardArticle from '../components/CardArticle';
 import SectionTitle from '../components/SectionTitle';
+import { ReactNode } from 'react';
 import { IArticle } from '../types/sanity';
 
-const article = {
-  title:
-    'Gostosura da Rafaella: os mitos e o que a ciência ainda não consegue explicar',
-  excerpt:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati nesciunt consequatur commodi in ipsam, deserunt reiciendis illum, veniam dolor explicabo incidunt expedita, eius autem iste saepe sunt harum sint ullam veritatis quo? Minus inventore architecto, vitae sed ullam eos eligendi.',
-  coverImage:
-    'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80',
-  publicationDate: new Date('2021-04-06T19:01:27Z'),
-  slug: '/blog',
-  tags: ['Engineering', 'Product'],
-  author: {
-    name: 'Autorão',
-    avatarSrc: 'https://100k-faces.glitch.me/random-image',
-  },
-};
-
 export interface ArticleProps {
-  allArticles: IArticle[];
+  featured: IArticle;
+  children: ReactNode;
 }
 
-const ArticlesFeed = ({ allArticles }: ArticleProps) => {
+const ArticlesFeed = ({ featured, children }: ArticleProps) => {
   return (
     <Container
       maxW={'7xl'}
@@ -41,7 +26,7 @@ const ArticlesFeed = ({ allArticles }: ArticleProps) => {
       >
         Artigo em Destaque
       </SectionTitle>
-      <CardArticleFeatured article={article} />
+      <CardArticleFeatured article={featured} />
 
       <SectionTitle
         marginTop={{ base: '10', sm: '5' }}
@@ -52,9 +37,7 @@ const ArticlesFeed = ({ allArticles }: ArticleProps) => {
       </SectionTitle>
       <Divider marginTop='5' />
       <Wrap spacing='30px' marginTop='5' marginBottom='10'>
-        {allArticles.map((article) => (
-          <CardArticle article={article} />
-        ))}
+        {children}
       </Wrap>
     </Container>
   );

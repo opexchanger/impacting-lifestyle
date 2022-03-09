@@ -9,7 +9,6 @@ interface SectionTitleProps extends HeadingProps {
 }
 
 function getDecor(direction: string, color: HeadingProps['color']) {
-  console.log(direction);
   return {
     content: "''",
     width: direction === 'under' ? '100%' : '0.55rem',
