@@ -16,17 +16,27 @@ export default function CodeSnippet({
 }: CodeSnippetProps) {
   const codeRef = useRef<HTMLElement>(null);
   useEffect(() => {
-    hljs.highlightBlock(findDOMNode(codeRef.current) as HTMLElement);
+    hljs.highlightElement(findDOMNode(codeRef.current) as HTMLElement);
   }, []);
 
   return (
     <Box>
       <pre>
-        <code className={language} ref={codeRef}>
+        <code
+          className={language}
+          ref={codeRef}
+          style={{ borderRadius: '8px' }}
+        >
           {children}
         </code>
       </pre>
-      <Text as='span' fontSize='sm' fontWeight='bold' colorScheme='gray'>
+      <Text
+        as='span'
+        fontSize='sm'
+        fontWeight='bold'
+        colorScheme='gray'
+        marginLeft='2'
+      >
         {filename}
       </Text>
     </Box>

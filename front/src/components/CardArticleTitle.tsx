@@ -7,7 +7,7 @@ interface CardArticleTitle {
 
 const CardArticleTitle: React.FC<CardArticleTitle> = ({ title }) => {
   return (
-    <Heading fontSize={{ base: 'lg', md: 'xl' }} marginTop='2'>
+    <Heading fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }} marginTop='1'>
       <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
         {title}
       </Link>

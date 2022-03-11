@@ -11,11 +11,8 @@ export default {
         list: [
           { title: 'Português', value: 'pt-BR' },
           { title: 'Inglês', value: 'en-US' },
-          { title: 'Espanhol', value: 'es-ES' },
         ],
       },
-      validation: (Rule: any) =>
-        Rule.required().error('A localidade é obrigatória'),
     },
     {
       name: 'slug',
@@ -23,6 +20,7 @@ export default {
       type: 'slug',
       options: {
         source: 'title',
+        maxLength: 96,
         slugify: (input: string) =>
           input
             .toLowerCase()
@@ -53,14 +51,15 @@ export default {
         Rule.min(50).warning(
           'A descrição ideal deve conter no mínimo 50 caracteres'
         ),
-        Rule.max(160).warning(
-          'A descrição ideal deve conter no máximo 160 caracteres'
+        Rule.max(180).warning(
+          'A descrição ideal deve conter no máximo 180 caracteres'
         ),
       ],
     },
+    // TODO usar como opção pra agendar a publicação
     {
       name: 'date',
-      title: 'Data',
+      title: 'Data de publicação',
       type: 'date',
       validation: (Rule: any) => Rule.required().error('A data é obrigatória'),
     },
@@ -113,6 +112,19 @@ export default {
       ],
       validation: (Rule: any) =>
         Rule.required().error('O conteúdo é obrigatório'),
+    },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'tags',
+      options: {
+        //Locks menu from creating new tags (defaults to false)
+        // frozen: true,
+        //Preset of tags (defaults to empty)
+        // preload: [{label: "Oranges", value: "oranges"}, {label: "Apples", value: "apples"}],
+        //Closes menu after tag selected (defaults to true)
+        closeMenuOnSelect: true,
+      },
     },
     {
       name: 'author',

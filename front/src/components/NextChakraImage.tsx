@@ -27,7 +27,6 @@ const NextChakraImage = (props: ImageProps & BoxProps) => {
   return (
     <Box
       pos='relative'
-      cursor='pointer'
       sx={{
         '> span': {
           borderRadius: 'lg',

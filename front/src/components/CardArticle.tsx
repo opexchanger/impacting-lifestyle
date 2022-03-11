@@ -21,7 +21,7 @@ const CardArticle: React.FC<CardArticleProps> = ({ article }) => {
     <NextLink href={`/blog/${slug}`}>
       <WrapItem
         width={{ base: '100%', sm: '44%', md: '45%', lg: '30%' }}
-        marginBottom={{ base: '5' }}
+        marginBottom={{ base: '4 !important', lg: '6 !important' }}
       >
         <Box w='100%' className='boxOuter'>
           <CardArticleCover coverImage={coverImage} />

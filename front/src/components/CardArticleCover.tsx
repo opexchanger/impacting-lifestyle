@@ -15,7 +15,7 @@ const CardArticleCover: React.FC<CardArticleCoverProps> = ({ coverImage }) => {
           transform='scale(1.0)'
           src={urlFor(coverImage).width(720).url()}
           alt='some text'
-          objectFit='contain'
+          objectFit='cover'
           width='800px'
           height='533px'
           transition='0.3s ease-in-out'

@@ -36,6 +36,7 @@ const ArticlesFeed = ({ featured, children }: ArticleProps) => {
         Artigos mais recentes
       </SectionTitle>
       <Divider marginTop='5' />
+      {/* TODO pra ter spaceX e spaceY considerar mudar pra Grid */}
       <Wrap spacing='30px' marginTop='5' marginBottom='10'>
         {children}
       </Wrap>

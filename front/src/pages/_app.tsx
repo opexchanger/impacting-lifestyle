@@ -1,4 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import 'highlight.js/styles/base16/equilibrium-gray-dark.css';
 
 import theme from '../styles/theme';
 import { AppProps } from 'next/app';

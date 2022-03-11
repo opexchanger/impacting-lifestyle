@@ -80,7 +80,7 @@ const CardArticleFeatured: React.FC<CardArticleFeaturedProps> = ({
           {tags?.length && <CardArticleTags tags={tags} marginBottom='2' />}
           <Heading
             marginTop='1'
-            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+            fontSize={{ base: 'xl', md: '2xl', lg: '4xl' }}
           >
             <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
               {title}

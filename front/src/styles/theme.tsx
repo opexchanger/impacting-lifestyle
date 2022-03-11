@@ -1,5 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { createBreakpoints, mode } from '@chakra-ui/theme-tools';
 import blogText from './blogText';
 
 // default
@@ -13,6 +13,10 @@ const breakpoints = createBreakpoints({
 });
 
 const theme = extendTheme({
+  config: {
+    initialColorMode: 'dark',
+    useSystemColorMode: false,
+  },
   colors: {
     transparent: 'transparent',
     black: '#16161D',
@@ -76,9 +80,9 @@ const theme = extendTheme({
     widest: '0.1em',
   },
   styles: {
-    global: {
-      '.blog-text': { ...blogText },
-    },
+    global: (props) => ({
+      '.blog-text': blogText(mode, props),
+    }),
   },
 });
 

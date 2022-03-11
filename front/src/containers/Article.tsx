@@ -1,11 +1,9 @@
 import { Container, Flex, Heading } from '@chakra-ui/react';
 import BlockContent from '@sanity/block-content-to-react';
 import CategoryTag from '../components/CategoryTag';
-import CodeSnippet from '../components/CodeSnippet';
 import FormattedDate from '../components/FormattedDate';
-import NextChakraImage from '../components/NextChakraImage';
-import { urlFor } from '../connection/functions';
 import { ContentItem } from '../types/sanity';
+import { textContentSerializer } from '../connection/serializers';
 
 export interface ArticleProps {
   title: string;
@@ -15,28 +13,6 @@ export interface ArticleProps {
   coverImageUrl?: string;
   content: ContentItem[];
 }
-
-const serializers = {
-  types: {
-    image: ({ node: { asset, caption } }) => (
-      <figure>
-        <NextChakraImage
-          src={urlFor(asset).width(720).url()}
-          alt={caption}
-          objectFit='contain'
-          width='720px'
-          height='480px'
-        />
-        <figcaption>{caption}</figcaption>
-      </figure>
-    ),
-    code: ({ node: { code, filename, language } }) => (
-      <CodeSnippet filename={filename} language={language}>
-        {code}
-      </CodeSnippet>
-    ),
-  },
-};
 
 export default function Article({
   title,
@@ -78,7 +54,7 @@ export default function Article({
       <BlockContent
         className='blog-text'
         blocks={content}
-        serializers={serializers}
+        serializers={textContentSerializer}
       />
     </Container>
   );
