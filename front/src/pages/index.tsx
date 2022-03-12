@@ -5,13 +5,12 @@ import { Flex, Text } from '@chakra-ui/react';
 import NewsletterSubscribe from '../components/NewsletterSubscribe';
 import ArticlesFeed from '../containers/ArticlesFeed';
 import Layout from '../containers/Layout';
+import CardArticle from '../components/CardArticle';
 
 import { getAllArticles } from '../connection/functions';
 import { IArticle } from '../types/sanity';
-import CardArticle from '../components/CardArticle';
 
-// TODO I18N https://medium.com/schmiedeone/i18n-routes-in-static-sites-using-nextjs-b6a547477bb1
-// https://dev.to/adrai/static-html-export-with-i18n-compatibility-in-nextjs-8cd
+/// I18N https://dev.to/adrai/static-html-export-with-i18n-compatibility-in-nextjs-8cd
 
 export const getStaticProps: GetStaticProps = async () => {
   const articles = await getAllArticles();

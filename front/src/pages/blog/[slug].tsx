@@ -44,8 +44,8 @@ const Index = ({ article }: ArticleProps) => (
     <Article
       title={article?.title}
       date={article?.date}
-      authorName={article?.author.name}
-      authorAvatarUrl={urlFor(article?.author?.avatar).width(40).url()}
+      tags={article?.tags}
+      author={article?.author}
       coverImageUrl={urlFor(article?.coverImage).width(720).url()}
       content={article?.content}
     />

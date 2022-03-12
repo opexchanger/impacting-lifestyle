@@ -12,6 +12,7 @@ export const allArticlesQuery = groq`
     title,
     description,
     date,
+    tags,
     coverImage,
     'author': author-> {
       name,
@@ -26,6 +27,7 @@ export const articleQuery = groq`
     title,
     description,
     date,
+    tags,
     coverImage,
     content,
     'author': author-> {

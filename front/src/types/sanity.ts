@@ -43,12 +43,17 @@ export interface Author {
   avatar: ImageReference;
 }
 
+export interface ITag {
+  label?: string;
+  value: string;
+}
+
 export interface IArticle {
-  tags: Array<string>;
-  slug?: string;
   title?: string;
-  description?: string;
   date?: string;
+  slug?: string;
+  tags: Array<ITag>;
+  description?: string;
   coverImage?: ImageReference;
   content?: ContentItem[];
   author?: Author;

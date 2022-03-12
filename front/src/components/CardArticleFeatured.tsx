@@ -1,11 +1,11 @@
 import { Box, Heading, Link, Text, useColorModeValue } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-import CardArticleTags from './CardArticleTags';
 import ArticleInfo from './ArticleInfo';
 import NextChakraImage from './NextChakraImage';
 import { IArticle } from '../types/sanity';
 import { urlFor } from '../connection/functions';
+import TagsStack from '../containers/TagsStack';
 
 interface CardArticleFeaturedProps {
   article: IArticle;
@@ -75,9 +75,8 @@ const CardArticleFeatured: React.FC<CardArticleFeaturedProps> = ({
           flex='1'
           flexDirection='column'
           justifyContent='center'
-          marginTop={{ base: '3', sm: '0' }}
         >
-          {tags?.length && <CardArticleTags tags={tags} marginBottom='2' />}
+          <TagsStack tags={tags} marginY='1' />
           <Heading
             marginTop='1'
             fontSize={{ base: 'xl', md: '2xl', lg: '4xl' }}

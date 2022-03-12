@@ -11,7 +11,7 @@ const CardArticleDescription: React.FC<CardArticleDescriptionProps> = ({
     <Text
       as='p'
       fontSize={{ base: 'sm', md: 'md' }}
-      marginTop='2'
+      marginTop={{ base: '1', md: '2' }}
       marginBottom='3'
       noOfLines={4}
     >

@@ -1,25 +1,20 @@
 import { Container, Flex, Heading } from '@chakra-ui/react';
 import BlockContent from '@sanity/block-content-to-react';
-import CategoryTag from '../components/CategoryTag';
 import FormattedDate from '../components/FormattedDate';
-import { ContentItem } from '../types/sanity';
+import { IArticle } from '../types/sanity';
 import { textContentSerializer } from '../connection/serializers';
+import TagsStack from './TagsStack';
 
-export interface ArticleProps {
-  title: string;
-  date: string;
-  authorName?: string;
-  authorAvatarUrl?: string;
+interface ArticleProps extends IArticle {
   coverImageUrl?: string;
-  content: ContentItem[];
 }
 
 export default function Article({
   title,
   date,
-  authorName,
-  authorAvatarUrl,
+  tags,
   coverImageUrl,
+  author,
   content,
 }: ArticleProps) {
   return (
@@ -37,10 +32,7 @@ export default function Article({
         >
           {date}
         </FormattedDate>
-        <Flex wrap='wrap'>
-          <CategoryTag title='Desenvolvimento' />
-          <CategoryTag title='Web' />
-        </Flex>
+        <TagsStack tags={tags} />
       </Flex>
       <Heading
         as='h1'

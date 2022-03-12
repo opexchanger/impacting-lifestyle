@@ -1,7 +1,8 @@
 import { Tag, TagLabel, TagLeftIcon, TagProps } from '@chakra-ui/react';
 import { BiCategoryAlt } from 'react-icons/bi';
+import { ITag } from '../types/sanity';
 
-const CategoryTag: React.FC<TagProps> = ({ title, ...props }) => {
+const CategoryTag: React.FC<TagProps & ITag> = ({ value, ...props }) => {
   return (
     <Tag
       size='sm'
@@ -11,7 +12,7 @@ const CategoryTag: React.FC<TagProps> = ({ title, ...props }) => {
       {...props}
     >
       <TagLeftIcon as={BiCategoryAlt} />
-      <TagLabel>{title}</TagLabel>
+      <TagLabel>{value}</TagLabel>
     </Tag>
   );
 };

@@ -6,7 +6,7 @@ import { IArticle } from '../types/sanity';
 import CardArticleCover from './CardArticleCover';
 import CardArticleTitle from './CardArticleTitle';
 import CardArticleDescription from './CardArticleDescription';
-import CardArticleTags from './CardArticleTags';
+import TagsStack from '../containers/TagsStack';
 
 export interface CardArticleProps {
   article: IArticle;
@@ -25,7 +25,7 @@ const CardArticle: React.FC<CardArticleProps> = ({ article }) => {
       >
         <Box w='100%' className='boxOuter'>
           <CardArticleCover coverImage={coverImage} />
-          {tags?.length && <CardArticleTags tags={tags} marginTop='3' />}
+          <TagsStack tags={tags} marginY='1' />
           <CardArticleTitle title={title} />
           <CardArticleDescription description={description} />
           <ArticleInfo author={author} date={date} />
