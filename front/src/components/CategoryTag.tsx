@@ -5,7 +5,7 @@ const CategoryTag: React.FC<TagProps> = ({ title, ...props }) => {
   return (
     <Tag
       size='sm'
-      colorScheme={title === 'Desenvolvimento' ? 'linkedin' : 'green'}
+      colorScheme='orange'
       borderRadius='full'
       marginRight='2'
       {...props}
