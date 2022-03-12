@@ -43,6 +43,7 @@ export default (mode: CallableFunction, props: any) => ({
       lineHeight: 1.5,
       '::marker': {
         color: 'orange.400',
+        fontWeight: 'bold',
       },
     },
   },
