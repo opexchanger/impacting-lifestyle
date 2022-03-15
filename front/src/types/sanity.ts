@@ -52,6 +52,7 @@ export interface IArticle {
   title?: string;
   date?: string;
   slug?: string;
+  locale?: string;
   tags: Array<ITag>;
   description?: string;
   coverImage?: ImageReference;

@@ -11,9 +11,12 @@ import { IArticle } from '../../types/sanity';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articlesPaths = await getAllArticlesPaths();
-  const paths = articlesPaths.map(({ slug }) => ({
+  const paths = articlesPaths.map(({ slug, locale }) => ({
     params: { slug },
+    locale,
   }));
+
+  console.log('articlesPaths :>> ', articlesPaths);
 
   return {
     paths,

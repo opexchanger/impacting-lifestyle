@@ -9,8 +9,8 @@ export default {
       type: 'string',
       options: {
         list: [
-          { title: 'Português', value: 'pt-BR' },
-          { title: 'Inglês', value: 'en-US' },
+          { title: 'Português', value: 'br' },
+          { title: 'Inglês', value: 'en' },
         ],
       },
     },

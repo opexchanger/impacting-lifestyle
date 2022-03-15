@@ -18,20 +18,22 @@ const CardArticle: React.FC<CardArticleProps> = ({ article }) => {
   // TODO isso totalmente dá um Compound Component
 
   return (
-    <NextLink href={`/blog/${slug}`}>
-      <WrapItem
-        width={{ base: '100%', sm: '44%', md: '45%', lg: '30%' }}
-        marginBottom={{ base: '4 !important', lg: '6 !important' }}
-      >
-        <Box w='100%' className='boxOuter'>
-          <CardArticleCover coverImage={coverImage} />
-          <TagsStack tags={tags} marginY='1' />
-          <CardArticleTitle title={title} />
-          <CardArticleDescription description={description} />
-          <ArticleInfo author={author} date={date} />
-        </Box>
-      </WrapItem>
-    </NextLink>
+    <WrapItem
+      width={{ base: '100%', sm: '44%', md: '45%', lg: '30%' }}
+      marginBottom={{ base: '4 !important', lg: '6 !important' }}
+    >
+      <NextLink href={`/article/${slug}`}>
+        <a>
+          <Box w='100%' className='boxOuter'>
+            <CardArticleCover coverImage={coverImage} />
+            <TagsStack tags={tags} marginY='1' />
+            <CardArticleTitle title={title} />
+            <CardArticleDescription description={description} />
+            <ArticleInfo author={author} date={date} />
+          </Box>
+        </a>
+      </NextLink>
+    </WrapItem>
   );
 };
 

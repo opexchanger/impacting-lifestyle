@@ -8,7 +8,8 @@ export type GetAllArticlePaths = () => Promise<IArticle[]>;
 export const getAllArticlesPaths: GetAllArticlePaths = async () => {
   const articlePaths = await client.fetch(groq`
     *[_type == 'post'] {
-      'slug': slug.current
+      'slug': slug.current,
+      locale
     }
   `);
 

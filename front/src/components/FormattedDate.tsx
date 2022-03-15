@@ -1,6 +1,6 @@
 import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { parseISO, format, isValid } from 'date-fns';
+import { parseISO, format, isValid, parse } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 export interface FormattedDateProps extends FlexProps {
@@ -8,15 +8,19 @@ export interface FormattedDateProps extends FlexProps {
   withIcon?: boolean;
 }
 
+// TODO pegar o LOCALE em um CONTEXT
+
 const FormattedDate = ({
   children,
   withIcon,
   ...props
 }: FormattedDateProps) => {
   let date: string | Date = '';
-  if (isValid(children)) {
-    date = parseISO(children);
-    date = format(date, `d 'de' MMMM 'de' yyyy`, { locale: ptBR });
+  try {
+    const parsedDate = parseISO(children);
+    date = format(parsedDate, `d 'de' MMMM 'de' yyyy`, { locale: ptBR });
+  } catch (err) {
+    console.log('Error Parsing Date :>> ', err);
   }
 
   return (

@@ -10,20 +10,18 @@ interface CardArticleCoverProps {
 const CardArticleCover: React.FC<CardArticleCoverProps> = ({ coverImage }) => {
   return (
     <Box className='imageBox'>
-      <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
-        <NextChakraImage
-          transform='scale(1.0)'
-          src={urlFor(coverImage).width(720).url()}
-          alt='some text'
-          objectFit='cover'
-          width='800px'
-          height='533px'
-          transition='0.3s ease-in-out'
-          _hover={{
-            transform: 'scale(1.05)',
-          }}
-        />
-      </Link>
+      <NextChakraImage
+        transform='scale(1.0)'
+        src={urlFor(coverImage).width(720).url()}
+        alt='some text'
+        objectFit='cover'
+        width='800px'
+        height='533px'
+        transition='0.3s ease-in-out'
+        _hover={{
+          transform: 'scale(1.05)',
+        }}
+      />
     </Box>
   );
 };
