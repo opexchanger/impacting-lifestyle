@@ -27,8 +27,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     slug = slug[0];
   }
   const article = await getArticleBySlug(slug);
-  console.log('slug :>> ', slug);
-  console.log('article :>> ', article);
 
   return {
     props: {
@@ -46,7 +44,7 @@ const Index = ({ article }: ArticleProps) => {
   if (article?.coverImage) {
     imageUrl = urlFor(article?.coverImage).width(720).url();
   }
-  console.log('article?.date :>> ', article?.date);
+
   return (
     <Layout>
       <Article

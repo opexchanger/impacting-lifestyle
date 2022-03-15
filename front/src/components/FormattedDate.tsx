@@ -15,12 +15,9 @@ const FormattedDate = ({
 }: FormattedDateProps) => {
   let date: string | Date = '';
   if (isValid(children)) {
-    console.log('isValid(children) :>> ', isValid(children));
     date = parseISO(children);
     date = format(date, `d 'de' MMMM 'de' yyyy`, { locale: ptBR });
   }
-
-  console.log('date :>> ', date);
 
   return (
     <Flex align='center' marginX='2' {...props}>

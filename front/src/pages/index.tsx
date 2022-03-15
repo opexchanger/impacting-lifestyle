@@ -13,7 +13,6 @@ import { IArticle } from '../types/sanity';
 /// I18N https://dev.to/adrai/static-html-export-with-i18n-compatibility-in-nextjs-8cd
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  console.log('locale :>> ', locale);
   const articles = await getAllArticlesByLocale(locale);
 
   return {
