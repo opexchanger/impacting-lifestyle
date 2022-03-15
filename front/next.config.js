@@ -6,4 +6,10 @@ module.exports = {
   images: {
     domains: ['images.unsplash.com', 'cdn.sanity.io'],
   },
+  i18n: {
+    locales: ['br', 'en'],
+    defaultLocale: 'en',
+    localeDetection: false,
+
+  }
 }

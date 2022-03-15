@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NewsletterSubscribe from '../../components/NewsletterSubscribe';
 import {
-  getArticle,
+  getArticleBySlug,
   getAllArticlesPaths,
   urlFor,
 } from '../../connection/functions';
@@ -26,7 +26,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (slug instanceof Array) {
     slug = slug[0];
   }
-  const article = await getArticle(slug);
+  const article = await getArticleBySlug(slug);
+  console.log('slug :>> ', slug);
+  console.log('article :>> ', article);
 
   return {
     props: {
@@ -39,18 +41,25 @@ export interface ArticleProps {
   article: IArticle;
 }
 
-const Index = ({ article }: ArticleProps) => (
-  <Layout>
-    <Article
-      title={article?.title}
-      date={article?.date}
-      tags={article?.tags}
-      author={article?.author}
-      coverImageUrl={urlFor(article?.coverImage).width(720).url()}
-      content={article?.content}
-    />
-    <NewsletterSubscribe />
-  </Layout>
-);
+const Index = ({ article }: ArticleProps) => {
+  let imageUrl: undefined | string;
+  if (article?.coverImage) {
+    imageUrl = urlFor(article?.coverImage).width(720).url();
+  }
+  console.log('article?.date :>> ', article?.date);
+  return (
+    <Layout>
+      <Article
+        title={article?.title}
+        date={article?.date}
+        tags={article?.tags}
+        author={article?.author}
+        {...(imageUrl && { coverImageUrl: imageUrl })}
+        content={article?.content}
+      />
+      <NewsletterSubscribe />
+    </Layout>
+  );
+};
 
 export default Index;

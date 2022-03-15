@@ -1,40 +1,68 @@
 import imageUrlBuilder from '@sanity/image-url';
 import client from './client';
-import { articlesPathsQuery, allArticlesQuery, articleQuery } from './queries';
 import { IArticle, Asset, ImageReference } from '../types/sanity';
+import groq from 'groq';
 
 export type GetAllArticlePaths = () => Promise<IArticle[]>;
 
 export const getAllArticlesPaths: GetAllArticlePaths = async () => {
-  const articlePaths = await client.fetch(articlesPathsQuery);
+  const articlePaths = await client.fetch(groq`
+    *[_type == 'post'] {
+      'slug': slug.current
+    }
+  `);
 
   return articlePaths;
 };
 
-// export type Getarticles = (
-//   page: number,
-//   postsPerPage: number
-// ) => Promise<article[]>;
-export type GetAllArticles = () => Promise<IArticle[]>;
+export type GetAllArticlesByLocale = (locale: string) => Promise<IArticle[]>;
 
-// export const getarticles: Getarticles = async (page, postsPerPage) => {
-//   const start = (page - 1) * postsPerPage;
-//   const end = page * postsPerPage;
-//   const articles = await client.fetch(articlesQuery, { start, end });
-
-//   return articles;
-// };
-export const getAllArticles: GetAllArticles = async () => {
-  const articles = await client.fetch(allArticlesQuery);
+export const getAllArticlesByLocale: GetAllArticlesByLocale = async (
+  locale
+) => {
+  const articles = await client.fetch(
+    groq`
+    *[_type == 'post' && locale == $locale] | order(date desc, title asc) {
+      'slug': slug.current,
+      title,
+      description,
+      date,
+      tags,
+      coverImage,
+      'author': author-> {
+        name,
+        avatar
+      }
+    }
+  `,
+    { locale }
+  );
 
   return articles;
 };
 
-export type GetArticle = (slug: string) => Promise<IArticle>;
+export type GetArticleBySlug = (slug: string) => Promise<IArticle>;
 
-export const getArticle: GetArticle = async (slug) => {
+export const getArticleBySlug: GetArticleBySlug = async (slug) => {
   const article = await client
-    .fetch(articleQuery, { slug })
+    .fetch(
+      groq`
+      *[_type == 'post' && slug.current == $slug] {
+        'slug': slug.current,
+        title,
+        description,
+        date,
+        tags,
+        coverImage,
+        content,
+        'author': author-> {
+          name,
+          avatar
+        }
+      }
+    `,
+      { slug }
+    )
     .then((res) => res[0]);
 
   return article;

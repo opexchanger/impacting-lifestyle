@@ -7,13 +7,14 @@ import ArticlesFeed from '../containers/ArticlesFeed';
 import Layout from '../containers/Layout';
 import CardArticle from '../components/CardArticle';
 
-import { getAllArticles } from '../connection/functions';
+import { getAllArticlesByLocale } from '../connection/functions';
 import { IArticle } from '../types/sanity';
 
 /// I18N https://dev.to/adrai/static-html-export-with-i18n-compatibility-in-nextjs-8cd
 
-export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getAllArticles();
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  console.log('locale :>> ', locale);
+  const articles = await getAllArticlesByLocale(locale);
 
   return {
     props: {

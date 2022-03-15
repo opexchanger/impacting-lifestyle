@@ -1,8 +1,4 @@
-import {
-  Heading,
-  useColorModeValue,
-  type HeadingProps,
-} from '@chakra-ui/react';
+import { Heading, useColorModeValue, HeadingProps } from '@chakra-ui/react';
 
 interface SectionTitleProps extends HeadingProps {
   decorDirection?: 'under' | 'side';
