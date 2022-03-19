@@ -15,6 +15,17 @@ export default {
       },
     },
     {
+      name: 'title',
+      title: 'Título',
+      type: 'string',
+      validation: (Rule: any) => [
+        Rule.required().error('O título é obrigatório'),
+        Rule.max(60).warning(
+          'O título ideal deve conter no máximo 60 caracteres'
+        ),
+      ],
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -29,17 +40,14 @@ export default {
             .replace(/[@#$%&*,.:;!?'"|(){}<>]/g, '')
             .replace(/\s+/g, '-'),
       },
+      validation: (Rule: any) => Rule.required().error('O slug é obrigatório'),
     },
     {
-      name: 'title',
-      title: 'Título',
-      type: 'string',
-      validation: (Rule: any) => [
-        Rule.required().error('O título é obrigatório'),
-        Rule.max(60).warning(
-          'O título ideal deve conter no máximo 60 caracteres'
-        ),
-      ],
+      name: 'listed',
+      title: 'Listado',
+      type: 'boolean',
+      initialValue: () => true,
+      validation: (Rule: any) => Rule.required().error('Escolha uma opção'),
     },
     {
       name: 'description',
@@ -62,6 +70,7 @@ export default {
       title: 'Data de publicação',
       type: 'date',
       validation: (Rule: any) => Rule.required().error('A data é obrigatória'),
+      initialValue: new Date().toISOString().split('T')[0],
     },
     {
       name: 'coverImage',
@@ -120,9 +129,7 @@ export default {
       options: {
         //Locks menu from creating new tags (defaults to false)
         // frozen: true,
-        //Preset of tags (defaults to empty)
         // preload: [{label: "Oranges", value: "oranges"}, {label: "Apples", value: "apples"}],
-        //Closes menu after tag selected (defaults to true)
         closeMenuOnSelect: true,
       },
     },
@@ -136,6 +143,10 @@ export default {
         },
       ],
       validation: (Rule: any) => Rule.required().error('O autor é obrigatório'),
+      initialValue: {
+        _type: 'reference',
+        _ref: '69573d76-f6bd-4b69-9a67-1c9da91cbe75',
+      },
     },
   ],
 };
