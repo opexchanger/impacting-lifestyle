@@ -1,14 +1,12 @@
 import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { parseISO, format, isValid, parse } from 'date-fns';
+import { parseISO, format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 export interface FormattedDateProps extends FlexProps {
   children: string;
   withIcon?: boolean;
 }
-
-// TODO pegar o LOCALE em um CONTEXT
 
 const FormattedDate = ({
   children,

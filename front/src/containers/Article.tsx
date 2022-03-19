@@ -7,6 +7,7 @@ import TagsStack from './TagsStack';
 
 interface ArticleProps extends IArticle {
   coverImageUrl?: string;
+  slug?: string;
 }
 
 export default function Article({

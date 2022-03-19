@@ -12,11 +12,13 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import DarkModeSwitch from '../components/DarkModeSwitch';
 import DesktopNav from '../components/DesktopNav';
 import MobileNav from '../components/MobileNav';
-import { INavItem } from '../types';
 import Logo from '../components/Logo';
+import { navItems } from '../translations';
+import { useLocale } from '../context/useLocaleContext';
 
 export default function Navigation() {
   const { isOpen, onToggle } = useDisclosure();
+  const locale = useLocale();
 
   return (
     <Box
@@ -55,7 +57,7 @@ export default function Navigation() {
           >
             <Logo />
             <Box display={{ base: 'none', md: 'block' }} ml={10}>
-              <DesktopNav navItems={navItems} />
+              <DesktopNav navItems={navItems[locale]} />
             </Box>
           </Flex>
           <Flex
@@ -68,42 +70,9 @@ export default function Navigation() {
         </Flex>
 
         <Collapse in={isOpen} animateOpacity>
-          <MobileNav navItems={navItems} />
+          <MobileNav navItems={navItems[locale]} />
         </Collapse>
       </Container>
     </Box>
   );
 }
-
-const navItems: Array<INavItem> = [
-  {
-    label: 'Categorias',
-    children: [
-      {
-        label: 'Desenvolvimento',
-        subLabel: 'Web, Dicas de Programação',
-        href: '#',
-      },
-      {
-        label: 'Finanças',
-        subLabel: 'Dinheiro e afins',
-        children: [
-          {
-            label: 'Pessoais',
-            subLabel: 'Pro seu próprio bolso',
-            href: '#',
-          },
-          {
-            label: 'Empresariais',
-            subLabel: 'Pro caixa do seu negócio',
-            href: '#',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Contato',
-    href: '#',
-  },
-];

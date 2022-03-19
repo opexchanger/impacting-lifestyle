@@ -1,7 +1,8 @@
 import imageUrlBuilder from '@sanity/image-url';
+import groq from 'groq';
+
 import client from './client';
 import { IArticle, Asset, ImageReference } from '../types/sanity';
-import groq from 'groq';
 
 export type GetAllArticlePaths = () => Promise<IArticle[]>;
 
@@ -25,6 +26,7 @@ export const getAllArticlesByLocale: GetAllArticlesByLocale = async (
     groq`
     *[_type == 'post' && locale == $locale] | order(date desc, title asc) {
       'slug': slug.current,
+      listed,
       title,
       description,
       date,

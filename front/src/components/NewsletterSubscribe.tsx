@@ -11,13 +11,16 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
+import { newsletter } from '../translations';
+import { useLocale } from '../context/useLocaleContext';
 
-const NewsletterSubscribe = () => {
+const NewsletterSubscribe: React.FC = () => {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<'initial' | 'submitting' | 'success'>(
     'initial'
   );
   const [error, setError] = useState(false);
+  const locale = useLocale();
 
   return (
     <Flex
@@ -42,7 +45,7 @@ const NewsletterSubscribe = () => {
           textAlign={'center'}
           mb={5}
         >
-          Subscribe to our Newsletter
+          {newsletter[locale].title}
         </Heading>
         <Stack
           direction={{ base: 'column', md: 'row' }}
@@ -77,8 +80,8 @@ const NewsletterSubscribe = () => {
               id={'email'}
               type={'email'}
               required
-              placeholder={'Your Email'}
-              aria-label={'Your Email'}
+              placeholder={newsletter[locale].inputPlaceholder}
+              aria-label={newsletter[locale].inputPlaceholder}
               value={email}
               disabled={state !== 'initial'}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -93,7 +96,11 @@ const NewsletterSubscribe = () => {
               w='100%'
               type={state === 'success' ? 'button' : 'submit'}
             >
-              {state === 'success' ? <CheckIcon /> : 'Submit'}
+              {state === 'success' ? (
+                <CheckIcon />
+              ) : (
+                newsletter[locale].buttonText
+              )}
             </Button>
           </FormControl>
         </Stack>
@@ -102,9 +109,7 @@ const NewsletterSubscribe = () => {
           textAlign={'center'}
           color={error ? 'red.500' : 'gray.500'}
         >
-          {error
-            ? 'Oh no an error occured! 😢 Please try again later.'
-            : "You won't receive any spam! ✌️"}
+          {error ? newsletter[locale].error : newsletter[locale].shortSentence}
         </Text>
       </Container>
     </Flex>

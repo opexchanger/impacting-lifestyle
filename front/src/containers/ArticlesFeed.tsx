@@ -4,6 +4,7 @@ import CardArticleFeatured from '../components/CardArticleFeatured';
 import SectionTitle from '../components/SectionTitle';
 import { ReactNode } from 'react';
 import { IArticle } from '../types/sanity';
+import { useLocale } from '../context/useLocaleContext';
 
 export interface ArticleProps {
   featured: IArticle;
@@ -11,6 +12,7 @@ export interface ArticleProps {
 }
 
 const ArticlesFeed = ({ featured, children }: ArticleProps) => {
+  const locale = useLocale();
   return (
     <Container
       maxW={'7xl'}
@@ -24,7 +26,7 @@ const ArticlesFeed = ({ featured, children }: ArticleProps) => {
         marginTop={{ base: '5', sm: '0' }}
         fontSize={{ base: '3xl', md: '4xl' }}
       >
-        Artigo em Destaque
+        {locale === 'br' ? 'Artigo em Destaque' : 'Featured Article'}
       </SectionTitle>
       <CardArticleFeatured article={featured} />
 
@@ -33,10 +35,9 @@ const ArticlesFeed = ({ featured, children }: ArticleProps) => {
         decorDirection='side'
         fontSize={{ base: '2xl', sm: '3xl' }}
       >
-        Artigos mais recentes
+        {locale === 'br' ? 'Artigos recentes' : 'Fresh Articles'}
       </SectionTitle>
       <Divider marginTop='5' />
-      {/* TODO pra ter spaceX e spaceY considerar mudar pra Grid */}
       <Wrap spacing='30px' marginTop='5' marginBottom='10'>
         {children}
       </Wrap>

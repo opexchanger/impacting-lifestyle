@@ -1,3 +1,4 @@
+import NewsletterSubscribe from '../components/NewsletterSubscribe';
 import Footer from './Footer';
 import Navigation from './Navigation';
 
@@ -6,6 +7,7 @@ const Layout: React.FC = ({ children }) => {
     <>
       <Navigation />
       {children}
+      <NewsletterSubscribe />
       <Footer />
     </>
   );

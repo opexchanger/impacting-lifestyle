@@ -49,9 +49,10 @@ export interface ITag {
 }
 
 export interface IArticle {
-  title?: string;
+  title: string;
   date?: string;
-  slug?: string;
+  slug: string;
+  listed?: boolean;
   locale?: string;
   tags: Array<ITag>;
   description?: string;

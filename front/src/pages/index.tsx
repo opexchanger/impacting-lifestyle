@@ -1,16 +1,19 @@
-import { ReactNode } from 'react';
 import { GetStaticProps } from 'next';
-import { Flex, Text } from '@chakra-ui/react';
+import { isBefore, parseISO } from 'date-fns';
 
-import NewsletterSubscribe from '../components/NewsletterSubscribe';
 import ArticlesFeed from '../containers/ArticlesFeed';
 import Layout from '../containers/Layout';
 import CardArticle from '../components/CardArticle';
+import EmptyPosts from '../components/EmptyPosts';
 
 import { getAllArticlesByLocale } from '../connection/functions';
 import { IArticle } from '../types/sanity';
+import { LocaleProvider } from '../context/useLocaleContext';
 
-/// I18N https://dev.to/adrai/static-html-export-with-i18n-compatibility-in-nextjs-8cd
+const filterListedAndOnDateArticles = (articles: IArticle[]): IArticle[] =>
+  articles
+    .filter(({ date }) => isBefore(parseISO(date), Date.now()))
+    .filter(({ listed }) => listed);
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const articles = await getAllArticlesByLocale(locale);
@@ -18,6 +21,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       articles,
+      locale,
     },
   };
 };
@@ -26,36 +30,28 @@ export interface ArticleProps {
   articles: IArticle[];
 }
 
+// aí agora ele ta aqui fora e n tem mais acsso ao valor inicial rs
+// export const LocaleContext = createContext<string>(undefined);
+// e agora ele virou custom hook o/
+
 const Index = ({ articles }: ArticleProps) => {
-  let content: ReactNode;
-  if (articles && articles.length) {
-    content = (
-      <ArticlesFeed featured={articles[0]}>
-        {articles.map((article) => (
-          <CardArticle article={article} key={article.slug} />
-        ))}
-      </ArticlesFeed>
-    );
-  } else {
-    content = (
-      <Flex justify='center' align='center' height='35vh'>
-        <Text
-          fontSize={{ base: 'md', sm: 'lg' }}
-          padding='3'
-          textAlign={{ base: 'center', md: 'initial' }}
-        >
-          Parece que nenhuma postagem foi carregada... isso deve se resolver em
-          breve.
-        </Text>
-      </Flex>
-    );
-  }
+  // createcontext tava aqui dentro, mas aí n posso exportar ele pros outros usarem com o useContext
+  const filteredArticles = filterListedAndOnDateArticles(articles);
 
   return (
+    // <LocaleProvider value={locale}>
     <Layout>
-      {content}
-      <NewsletterSubscribe />
+      {articles && articles.length ? (
+        <ArticlesFeed featured={filteredArticles[0]}>
+          {filteredArticles.map((article) => (
+            <CardArticle article={article} key={article.slug} />
+          ))}
+        </ArticlesFeed>
+      ) : (
+        <EmptyPosts />
+      )}
     </Layout>
+    // </LocaleProvider>
   );
 };
 

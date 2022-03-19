@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let { slug } = params;
   if (slug instanceof Array) {
     slug = slug[0];
@@ -34,15 +34,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       article,
+      locale,
     },
   };
 };
 
 export interface ArticleProps {
   article: IArticle;
+  locale: string;
 }
 
-const Index = ({ article }: ArticleProps) => {
+const Index = ({ article, locale }: ArticleProps) => {
   let imageUrl: undefined | string;
   if (article?.coverImage) {
     imageUrl = urlFor(article?.coverImage).width(720).url();
@@ -58,7 +60,7 @@ const Index = ({ article }: ArticleProps) => {
         {...(imageUrl && { coverImageUrl: imageUrl })}
         content={article?.content}
       />
-      <NewsletterSubscribe />
+      <NewsletterSubscribe locale={locale} />
     </Layout>
   );
 };
